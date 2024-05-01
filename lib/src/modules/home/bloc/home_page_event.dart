@@ -6,3 +6,5 @@ sealed class HomePageEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+final class FetchMoviesEvent extends HomePageEvent {}
