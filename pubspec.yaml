@@ -12,8 +12,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  bloc: ^8.1.4
   cached_network_image: ^3.3.1
   dio: ^5.4.3+1
+  flutter_bloc: ^8.1.5
   get_it: ^7.6.7
   json_annotation: ^4.9.0
   retrofit: ^4.1.0
