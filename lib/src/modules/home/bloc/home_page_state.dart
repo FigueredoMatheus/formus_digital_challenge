@@ -11,6 +11,20 @@ final class HomePageInitial extends HomePageState {}
 
 final class LoadingState extends HomePageState {}
 
-final class FailOnFetchMoviesState extends HomePageState {}
+final class FailOnFetchMoviesState extends HomePageState {
+  final String errorMessage;
 
-final class SuccessOnFetchMoviesState extends HomePageState {}
+  const FailOnFetchMoviesState({required this.errorMessage});
+
+  @override
+  List<Object> get props => [errorMessage];
+}
+
+final class SuccessOnFetchMoviesState extends HomePageState {
+  final List<MovieModel> movies;
+
+  const SuccessOnFetchMoviesState({required this.movies});
+
+  @override
+  List<Object> get props => [movies];
+}
