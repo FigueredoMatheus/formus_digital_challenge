@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formus_digital_challenge/flavors/flavors.dart';
+import 'package:formus_digital_challenge/src/modules/home/bloc/home_page_bloc.dart';
 import 'package:formus_digital_challenge/src/modules/home/view/home_page.dart';
 
 class App extends StatelessWidget {
@@ -7,13 +9,18 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: FlavorsSettings.title,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => HomePageBloc()),
+      ],
+      child: MaterialApp(
+        title: FlavorsSettings.title,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const HomePage(),
       ),
-      home: const HomePage(),
     );
   }
 }
