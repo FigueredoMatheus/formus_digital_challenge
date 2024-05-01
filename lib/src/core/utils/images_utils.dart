@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:formus_digital_challenge/src/core/themes/my_app_k_colors.dart';
 
 class ImagesUtils {
   static Widget showNetworkImage(
@@ -18,8 +19,17 @@ class ImagesUtils {
       ),
       child: CachedNetworkImage(
         imageUrl: imageUrl,
-        progressIndicatorBuilder: (context, url, downloadProgress) =>
-            CircularProgressIndicator(value: downloadProgress.progress),
+        progressIndicatorBuilder: (context, url, downloadProgress) => Container(
+          height: 40,
+          width: 40,
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: const FittedBox(
+            fit: BoxFit.contain,
+            child: CircularProgressIndicator(
+              color: MyAppKColors.kBgColor,
+            ),
+          ),
+        ),
         errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
     );
