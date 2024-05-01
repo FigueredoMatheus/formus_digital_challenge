@@ -9,15 +9,19 @@ sealed class HomePageState extends Equatable {
 
 final class HomePageInitial extends HomePageState {}
 
-final class LoadingState extends HomePageState {}
+final class LoadingState extends HomePageState {
+  final String? loadingMessage;
+
+  const LoadingState({this.loadingMessage = 'Loading...'});
+}
 
 final class FailOnFetchMoviesState extends HomePageState {
-  final String errorMessage;
+  final OnRequisitionFailModel onFailModel;
 
-  const FailOnFetchMoviesState({required this.errorMessage});
+  const FailOnFetchMoviesState({required this.onFailModel});
 
   @override
-  List<Object> get props => [errorMessage];
+  List<Object> get props => [onFailModel];
 }
 
 final class SuccessOnFetchMoviesState extends HomePageState {
