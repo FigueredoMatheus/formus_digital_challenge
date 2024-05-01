@@ -14,13 +14,14 @@ dependencies:
     sdk: flutter
   bloc: ^8.1.4
   cached_network_image: ^3.3.1
+  cupertino_icons: ^1.0.2
   dio: ^5.4.3+1
   equatable: ^2.0.5
   flutter_bloc: ^8.1.5
   get_it: ^7.6.7
   json_annotation: ^4.9.0
+  shimmer: ^3.0.0
   retrofit: ^4.1.0
-  cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
