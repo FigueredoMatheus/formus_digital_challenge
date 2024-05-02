@@ -24,7 +24,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: double.infinity,
         padding: EdgeInsets.only(
           bottom: 25,
           left: 25,

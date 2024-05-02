@@ -27,7 +27,7 @@ class HomePageBlocLoadingStateWidget extends StatelessWidget {
                 ),
                 constraints:
                     BoxConstraints(maxWidth: ConstantsValues.movieCardMaxWidth),
-                width: maxWidth * 0.45,
+                width: maxWidth * 0.47,
                 height: ConstantsValues.movieCardHeight,
               );
             }),
