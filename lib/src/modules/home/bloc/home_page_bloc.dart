@@ -23,7 +23,9 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     try {
       final response = await getIt<MoviesRepository>().fetchTopMovies();
 
-      emit(SuccessOnFetchMoviesState(movies: response));
+      final List<MovieModel> movies = response.sublist(0, 10);
+
+      emit(SuccessOnFetchMoviesState(movies: movies));
     } on DioException catch (e) {
       final onFailModel = OnRequisitionFailModel(
         code: e.response?.statusCode,
