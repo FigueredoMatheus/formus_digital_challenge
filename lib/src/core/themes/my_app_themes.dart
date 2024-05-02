@@ -8,14 +8,21 @@ class MyAppThemes extends GetxService {
   ThemeData getLightTheme() {
     return ThemeData(
       primarySwatch: Colors.blue,
-      textTheme: GoogleFonts.epilogueTextTheme().copyWith(),
+      textTheme: GoogleFonts.epilogueTextTheme().copyWith(
+        displayMedium: const TextStyle(
+          fontSize: 20,
+          color: Colors.white,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
       scaffoldBackgroundColor: MyAppKColors.kBgColor,
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           textStyle: MaterialStateProperty.all(
             GoogleFonts.epilogue(
-              fontSize: 14.67,
+              fontSize: 16,
               fontWeight: FontWeight.w600,
+              color: MyAppKColors.kLightPurpleColor,
             ),
           ),
         ),
