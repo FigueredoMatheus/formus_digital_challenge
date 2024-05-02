@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:formus_digital_challenge/src/models/movie/movie_model.dart';
-import 'package:formus_digital_challenge/src/modules/home/widgets/movie_card.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formus_digital_challenge/src/modules/home/bloc/home_page_bloc.dart';
+import 'package:formus_digital_challenge/src/modules/home/widgets/bloc_state_widgets/bloc_fail_fetch_data_state.dart';
+import 'package:formus_digital_challenge/src/modules/home/widgets/bloc_state_widgets/bloc_loading_state_widget.dart';
+import 'package:formus_digital_challenge/src/modules/home/widgets/bloc_state_widgets/bloc_success_fetch_data_state.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,47 +13,44 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final movie = MovieModel.fromJson(
-    {
-      "rank": 1,
-      "title": "The Shawshank Redemption",
-      "description":
-          "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
-      "image":
-          "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_QL75_UX380_CR0,1,380,562_.jpg",
-      "big_image":
-          "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@",
-      "genre": ["Drama"],
-      "thumbnail":
-          "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UY67_CR0,0,45,67_AL_.jpg",
-      "rating": "9.3",
-      "id": "top1",
-      "year": 1994,
-      "imdbid": "tt0111161",
-      "imdb_link": "https://www.imdb.com/title/tt0111161"
-    },
-  );
+  @override
+  void initState() {
+    super.initState();
+
+    context.read<HomePageBloc>().add(FetchMoviesEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff56636C),
-      body: Padding(
+      body: Container(
+        width: double.infinity,
         padding: EdgeInsets.only(
           bottom: 25,
           left: 25,
           right: 25,
           top: MediaQuery.of(context).padding.top + 25,
         ),
-        child: Container(
-          color: Colors.red,
-          child: Wrap(
-            alignment: WrapAlignment.spaceBetween,
-            runAlignment: WrapAlignment.spaceBetween,
-            children: [
-              MovieHomePageCard(movieModel: movie),
-              MovieHomePageCard(movieModel: movie),
-            ],
-          ),
+        child: BlocBuilder<HomePageBloc, HomePageState>(
+          builder: (context, state) {
+            if (state is LoadingState) {
+              return const HomePageBlocLoadingStateWidget();
+            }
+
+            if (state is FailOnFetchMoviesState) {
+              return HomePageBlocFailFetchDataStateWidget(
+                onFailModel: state.onFailModel,
+              );
+            }
+
+            if (state is SuccessOnFetchMoviesState) {
+              return HomePageBlocSuccessFetchDataStateWidget(
+                movies: state.movies,
+              );
+            }
+
+            return Container();
+          },
         ),
       ),
     );

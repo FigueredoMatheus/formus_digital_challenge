@@ -27,7 +27,7 @@ class OnRequisitionFailModel {
 
   setErrorMessage(dynamic messageData) {
     if (messageData == null) {
-      message = 'Request failed. Please try again later.';
+      message = 'Request failed. Please try again.';
     } else if (messageData is String) {
       message = messageData;
     } else if (messageData is Map) {
